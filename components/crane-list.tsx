@@ -71,25 +71,27 @@ export function CraneList() {
   return (
     <div className="space-y-6">
       <Card className="bg-card border-border">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle>Crane Inventory Overview</CardTitle>
-              <CardDescription>Monitor all overhead cranes and their maintenance status</CardDescription>
+        <CardHeader className="pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <CardTitle className="text-lg sm:text-xl">Crane Inventory Overview</CardTitle>
+              <CardDescription className="text-sm">Monitor all overhead cranes and their maintenance status</CardDescription>
             </div>
-            <Button className="bg-primary hover:bg-primary/90">Add New Crane</Button>
+            <Button className="bg-primary hover:bg-primary/90 w-full sm:w-auto text-sm">
+              Add New Crane
+            </Button>
           </div>
         </CardHeader>
       </Card>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         <Card className="bg-card border-border">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Total Cranes</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-foreground">{MOCK_CRANES.length}</div>
+            <div className="text-2xl sm:text-3xl font-bold text-foreground">{MOCK_CRANES.length}</div>
             <p className="text-xs text-muted-foreground mt-1">5 Active, 1 In Maintenance</p>
           </CardContent>
         </Card>
@@ -99,20 +101,20 @@ export function CraneList() {
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-green-600" />
-              <span className="text-lg font-semibold">4 Good</span>
+              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+              <span className="text-base sm:text-lg font-semibold">4 Good</span>
             </div>
             <p className="text-xs text-muted-foreground mt-2">2 Need Attention</p>
           </CardContent>
         </Card>
-        <Card className="bg-card border-border">
+        <Card className="bg-card border-border sm:col-span-2 lg:col-span-1">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Upcoming Maintenance</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5 text-blue-600" />
-              <span className="text-lg font-semibold">3 Scheduled</span>
+              <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              <span className="text-base sm:text-lg font-semibold">3 Scheduled</span>
             </div>
             <p className="text-xs text-muted-foreground mt-2">Next 7 days</p>
           </CardContent>
@@ -120,18 +122,18 @@ export function CraneList() {
       </div>
 
       {/* Cranes Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
         {MOCK_CRANES.map((crane) => (
           <Card key={crane.id} className="bg-card border-border hover:border-primary/50 transition-colors">
             <CardHeader className="pb-3">
-              <div className="flex items-start justify-between">
-                <div>
-                  <CardTitle className="text-base">{crane.name}</CardTitle>
-                  <CardDescription className="text-sm">{crane.location}</CardDescription>
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0 flex-1">
+                  <CardTitle className="text-base truncate">{crane.name}</CardTitle>
+                  <CardDescription className="text-sm truncate">{crane.location}</CardDescription>
                 </div>
                 <Badge
                   variant={crane.status === "Active" ? "default" : "secondary"}
-                  className={crane.status === "Active" ? "bg-green-600" : "bg-yellow-600"}
+                  className={`${crane.status === "Active" ? "bg-green-600" : "bg-yellow-600"} text-xs whitespace-nowrap`}
                 >
                   {crane.status}
                 </Badge>
@@ -140,24 +142,24 @@ export function CraneList() {
             <CardContent className="space-y-3">
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div>
-                  <p className="text-muted-foreground">Capacity</p>
+                  <p className="text-muted-foreground text-xs">Capacity</p>
                   <p className="font-medium">{crane.capacity}</p>
                 </div>
                 <div>
-                  <p className="text-muted-foreground">Health</p>
+                  <p className="text-muted-foreground text-xs">Health</p>
                   <div className="flex items-center gap-1 mt-0.5">
                     {crane.health === "Good" && <div className="w-2 h-2 rounded-full bg-green-600" />}
                     {crane.health === "Fair" && <div className="w-2 h-2 rounded-full bg-yellow-600" />}
                     {crane.health === "Needs Attention" && <div className="w-2 h-2 rounded-full bg-red-600" />}
-                    <span className="text-xs">{crane.health}</span>
+                    <span className="text-xs truncate">{crane.health}</span>
                   </div>
                 </div>
               </div>
               <div className="border-t border-border pt-3 text-xs text-muted-foreground space-y-1">
-                <p>Last Check: {crane.lastCheck}</p>
-                <p>Next Scheduled: {crane.nextScheduled}</p>
+                <p className="truncate">Last Check: {crane.lastCheck}</p>
+                <p className="truncate">Next Scheduled: {crane.nextScheduled}</p>
               </div>
-              <Button variant="outline" className="w-full mt-2 bg-transparent">
+              <Button variant="outline" className="w-full mt-2 bg-transparent text-sm">
                 View Details
               </Button>
             </CardContent>

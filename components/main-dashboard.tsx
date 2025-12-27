@@ -18,15 +18,17 @@ export function MainDashboard() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-card">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-foreground">Crane Maintenance Manager</h1>
-              <p className="text-muted-foreground mt-1">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground truncate">
+                Crane Maintenance System
+              </h1>
+              <p className="text-sm sm:text-base text-muted-foreground mt-1 line-clamp-2">
                 Digital scheduling & tracking system for factory overhead cranes
               </p>
             </div>
-            <Badge variant="outline" className="h-fit bg-primary/10 text-primary border-primary/30">
+            <Badge variant="outline" className="h-fit bg-primary/10 text-primary border-primary/30 self-start sm:self-center">
               3-10 Cranes
             </Badge>
           </div>
@@ -34,15 +36,15 @@ export function MainDashboard() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-6 bg-secondary">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="daily">Daily Checks</TabsTrigger>
-            <TabsTrigger value="history">History</TabsTrigger>
-            <TabsTrigger value="procedures">Procedures</TabsTrigger>
-            <TabsTrigger value="inventory">Inventory</TabsTrigger>
-            <TabsTrigger value="costs">Costs</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 bg-secondary gap-1 h-auto p-1">
+            <TabsTrigger value="overview" className="text-xs sm:text-sm px-2 py-2">Overview</TabsTrigger>
+            <TabsTrigger value="daily" className="text-xs sm:text-sm px-2 py-2">Daily</TabsTrigger>
+            <TabsTrigger value="history" className="text-xs sm:text-sm px-2 py-2">History</TabsTrigger>
+            <TabsTrigger value="procedures" className="text-xs sm:text-sm px-2 py-2">Procedures</TabsTrigger>
+            <TabsTrigger value="inventory" className="text-xs sm:text-sm px-2 py-2">Inventory</TabsTrigger>
+            <TabsTrigger value="costs" className="text-xs sm:text-sm px-2 py-2">Costs</TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */}

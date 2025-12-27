@@ -130,12 +130,12 @@ export function DailyChecklist() {
   return (
     <div className="space-y-6">
       <Card className="bg-card border-border">
-        <CardHeader>
-          <CardTitle>Maintenance Checklist</CardTitle>
-          <CardDescription>Complete daily, weekly, and monthly checks for assigned cranes</CardDescription>
+        <CardHeader className="pb-4">
+          <CardTitle className="text-lg sm:text-xl">Maintenance Checklist</CardTitle>
+          <CardDescription className="text-sm">Complete daily, weekly, and monthly checks for assigned cranes</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <CardContent className="space-y-4 sm:space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             <div>
               <label className="text-sm font-medium text-foreground mb-2 block">Select Crane</label>
               <Select value={selectedCrane} onValueChange={setSelectedCrane}>
@@ -167,7 +167,7 @@ export function DailyChecklist() {
               </Select>
             </div>
 
-            <div>
+            <div className="sm:col-span-2 lg:col-span-1">
               <label className="text-sm font-medium text-foreground mb-2 block">Progress</label>
               <div className="bg-secondary rounded-md p-3 text-center">
                 <p className="text-sm font-semibold text-foreground">
@@ -202,8 +202,8 @@ export function DailyChecklist() {
                 </label>
 
                 {checkedItems[check.id] && (
-                  <div className="space-y-3 pl-8 border-l-2 border-primary">
-                    <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-3 pl-4 sm:pl-8 border-l-2 border-primary">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <label className="text-sm font-medium text-foreground mb-2 block">
                           Start Date & Time <span className="text-error">*</span>
@@ -217,7 +217,7 @@ export function DailyChecklist() {
                               [check.id]: e.target.value,
                             }))
                           }
-                          className="bg-background border-border text-foreground"
+                          className="bg-background border-border text-foreground text-sm"
                           required
                         />
                       </div>
@@ -234,7 +234,7 @@ export function DailyChecklist() {
                               [check.id]: e.target.value,
                             }))
                           }
-                          className="bg-background border-border text-foreground"
+                          className="bg-background border-border text-foreground text-sm"
                           required
                         />
                       </div>
@@ -293,7 +293,7 @@ export function DailyChecklist() {
                             </button>
                           </div>
 
-                          <div className="grid grid-cols-3 gap-2">
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                             <div>
                               <label className="text-xs font-medium text-foreground mb-1 block">Item Name</label>
                               <Input
@@ -343,20 +343,20 @@ export function DailyChecklist() {
                       <label className="text-sm font-medium text-foreground block">Photographs (Optional)</label>
 
                       {(photos[check.id] || []).length > 0 && (
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                           {(photos[check.id] || []).map((photo, index) => (
                             <div key={index} className="relative group">
                               <img
                                 src={URL.createObjectURL(photo) || "/placeholder.svg"}
                                 alt={`Photo ${index + 1}`}
-                                className="w-full h-24 object-cover rounded border border-border"
+                                className="w-full h-20 sm:h-24 object-cover rounded border border-border"
                               />
                               <button
                                 type="button"
                                 onClick={() => removePhoto(check.id, index)}
                                 className="absolute top-1 right-1 bg-error text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
                               >
-                                <X size={14} />
+                                <X size={12} />
                               </button>
                             </div>
                           ))}
@@ -388,14 +388,14 @@ export function DailyChecklist() {
             ))}
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <Button
               onClick={handleSave}
               className="bg-success hover:bg-success/90 text-success-foreground flex-1 font-semibold"
             >
               Save Check
             </Button>
-            <Button variant="outline" className="border-primary/30 bg-transparent text-primary hover:bg-primary/10">
+            <Button variant="outline" className="border-primary/30 bg-transparent text-primary hover:bg-primary/10 sm:w-auto">
               Clear Form
             </Button>
           </div>

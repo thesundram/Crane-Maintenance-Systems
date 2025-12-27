@@ -73,24 +73,26 @@ export function InventoryManager() {
   return (
     <div className="space-y-6">
       <Card className="bg-card border-border">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle>Spare Parts & Tools Inventory</CardTitle>
-              <CardDescription>Manage stock levels for critical maintenance components</CardDescription>
+        <CardHeader className="pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <CardTitle className="text-lg sm:text-xl">Spare Parts & Tools Inventory</CardTitle>
+              <CardDescription className="text-sm">Manage stock levels for critical maintenance components</CardDescription>
             </div>
-            <Button className="bg-primary hover:bg-primary/90">Add New Item</Button>
+            <Button className="bg-primary hover:bg-primary/90 w-full sm:w-auto text-sm">
+              Add New Item
+            </Button>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Filter */}
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <Input
               placeholder="Search parts..."
-              className="flex-1 bg-background border-border text-foreground placeholder:text-muted-foreground"
+              className="flex-1 bg-background border-border text-foreground placeholder:text-muted-foreground text-sm"
             />
             <Select defaultValue="all">
-              <SelectTrigger className="w-48 bg-background border-border">
+              <SelectTrigger className="w-full sm:w-48 bg-background border-border">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-card border-border">
@@ -101,8 +103,55 @@ export function InventoryManager() {
             </Select>
           </div>
 
-          {/* Inventory Table */}
-          <div className="overflow-x-auto">
+          {/* Inventory Table - Mobile Cards */}
+          <div className="block sm:hidden space-y-3">
+            {SPARE_PARTS.map((part) => {
+              const isLow = part.stock < part.minStock
+              return (
+                <Card key={part.id} className={`border-border ${isLow ? "border-accent/50 bg-accent/5" : ""}`}>
+                  <CardContent className="p-4 space-y-3">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-medium text-foreground text-sm truncate">{part.name}</h4>
+                        <p className="text-xs text-muted-foreground font-mono">{part.partNumber}</p>
+                      </div>
+                      {isLow && <AlertTriangle className="w-4 h-4 text-accent flex-shrink-0" />}
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-3 text-xs">
+                      <div>
+                        <p className="text-muted-foreground">Stock</p>
+                        <p className="font-semibold text-foreground">{part.stock}</p>
+                      </div>
+                      <div>
+                        <p className="text-muted-foreground">Min. Stock</p>
+                        <p className="text-foreground">{part.minStock}</p>
+                      </div>
+                      <div>
+                        <p className="text-muted-foreground">Cost/Unit</p>
+                        <p className="text-foreground">₹{part.cost.toFixed(2)}</p>
+                      </div>
+                      <div>
+                        <p className="text-muted-foreground">Supplier</p>
+                        <p className="text-foreground truncate">{part.supplier}</p>
+                      </div>
+                    </div>
+                    
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full text-primary border-primary/30 hover:bg-primary/10"
+                    >
+                      {isLow ? "Order Now" : "Edit Item"}
+                    </Button>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+
+          {/* Inventory Table - Desktop */}
+          <div className="hidden sm:block overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border">
@@ -147,23 +196,23 @@ export function InventoryManager() {
           </div>
 
           {/* Summary */}
-          <div className="grid grid-cols-3 gap-4 mt-6 pt-4 border-t border-border">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-6 pt-4 border-t border-border">
             <Card className="bg-background border-border">
               <CardContent className="pt-4">
                 <p className="text-xs text-muted-foreground mb-1">Total Inventory Value</p>
-                <p className="text-xl font-bold text-foreground">₹26,495.00</p>
+                <p className="text-lg sm:text-xl font-bold text-foreground">₹26,495.00</p>
               </CardContent>
             </Card>
             <Card className="bg-background border-border">
               <CardContent className="pt-4">
                 <p className="text-xs text-muted-foreground mb-1">Low Stock Items</p>
-                <p className="text-xl font-bold text-accent">1 Item</p>
+                <p className="text-lg sm:text-xl font-bold text-accent">1 Item</p>
               </CardContent>
             </Card>
             <Card className="bg-background border-border">
               <CardContent className="pt-4">
                 <p className="text-xs text-muted-foreground mb-1">Avg. Reorder Time</p>
-                <p className="text-xl font-bold text-foreground">5-7 Days</p>
+                <p className="text-lg sm:text-xl font-bold text-foreground">5-7 Days</p>
               </CardContent>
             </Card>
           </div>
