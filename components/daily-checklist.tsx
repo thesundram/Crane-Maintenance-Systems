@@ -129,20 +129,22 @@ export function DailyChecklist() {
 
   return (
     <div className="space-y-6">
-      <Card className="bg-card border-border">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-lg sm:text-xl">Maintenance Checklist</CardTitle>
-          <CardDescription className="text-sm">Complete daily, weekly, and monthly checks for assigned cranes</CardDescription>
+      <Card className="bg-white border-[#1e3a5f]/20">
+        <CardHeader className="bg-[#1e3a5f] text-white rounded-t-lg">
+          <CardTitle className="text-white">Maintenance Checklist</CardTitle>
+          <CardDescription className="text-blue-200">
+            Complete daily, weekly, and monthly checks for assigned cranes
+          </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4 sm:space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+        <CardContent className="space-y-6 pt-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="text-sm font-medium text-foreground mb-2 block">Select Crane</label>
+              <label className="text-sm font-medium text-[#1e3a5f] mb-2 block">Select Crane</label>
               <Select value={selectedCrane} onValueChange={setSelectedCrane}>
-                <SelectTrigger className="bg-background border-border">
+                <SelectTrigger className="bg-white border-[#1e3a5f]/30 text-[#1e3a5f]">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-card border-border">
+                <SelectContent className="bg-white border-[#1e3a5f]/30">
                   <SelectItem value="1">Hoist Unit A1 (Assembly Line 1)</SelectItem>
                   <SelectItem value="2">Hoist Unit B2 (Assembly Line 2)</SelectItem>
                   <SelectItem value="3">Hoist Unit C3 (Material Storage)</SelectItem>
@@ -154,12 +156,12 @@ export function DailyChecklist() {
             </div>
 
             <div>
-              <label className="text-sm font-medium text-foreground mb-2 block">Check Type</label>
+              <label className="text-sm font-medium text-[#1e3a5f] mb-2 block">Check Type</label>
               <Select value={checkType} onValueChange={setCheckType}>
-                <SelectTrigger className="bg-background border-border">
+                <SelectTrigger className="bg-white border-[#1e3a5f]/30 text-[#1e3a5f]">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-card border-border">
+                <SelectContent className="bg-white border-[#1e3a5f]/30">
                   <SelectItem value="daily">Daily Checks</SelectItem>
                   <SelectItem value="weekly">Weekly Checks</SelectItem>
                   <SelectItem value="monthly">Monthly Checks</SelectItem>
@@ -167,15 +169,15 @@ export function DailyChecklist() {
               </Select>
             </div>
 
-            <div className="sm:col-span-2 lg:col-span-1">
-              <label className="text-sm font-medium text-foreground mb-2 block">Progress</label>
-              <div className="bg-secondary rounded-md p-3 text-center">
-                <p className="text-sm font-semibold text-foreground">
+            <div>
+              <label className="text-sm font-medium text-[#1e3a5f] mb-2 block">Progress</label>
+              <div className="bg-[#1e3a5f]/10 rounded-md p-3 text-center border border-[#1e3a5f]/20">
+                <p className="text-sm font-semibold text-[#1e3a5f]">
                   {completedCount}/{checks.length} Completed
                 </p>
-                <div className="w-full bg-border rounded-full h-2 mt-2">
+                <div className="w-full bg-[#1e3a5f]/20 rounded-full h-2 mt-2">
                   <div
-                    className="bg-success h-2 rounded-full transition-all"
+                    className="bg-green-600 h-2 rounded-full transition-all"
                     style={{ width: `${(completedCount / checks.length) * 100}%` }}
                   />
                 </div>
@@ -185,16 +187,16 @@ export function DailyChecklist() {
 
           <div className="space-y-4">
             {checks.map((check) => (
-              <div key={check.id} className="border border-border rounded-lg p-4 bg-secondary/30 space-y-3">
+              <div key={check.id} className="border border-[#1e3a5f]/20 rounded-lg p-4 bg-[#1e3a5f]/5 space-y-3">
                 <label className="flex items-center gap-3 cursor-pointer">
                   <Checkbox
                     checked={checkedItems[check.id] || false}
                     onCheckedChange={() => handleCheck(check.id)}
-                    className="border-primary"
+                    className="border-[#1e3a5f] data-[state=checked]:bg-[#1e3a5f]"
                   />
                   <span
                     className={`flex-1 font-medium ${
-                      checkedItems[check.id] ? "line-through text-muted-foreground" : "text-foreground"
+                      checkedItems[check.id] ? "line-through text-gray-400" : "text-[#1e3a5f]"
                     }`}
                   >
                     {check.label}
@@ -202,11 +204,11 @@ export function DailyChecklist() {
                 </label>
 
                 {checkedItems[check.id] && (
-                  <div className="space-y-3 pl-4 sm:pl-8 border-l-2 border-primary">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="space-y-3 pl-8 border-l-2 border-[#1e3a5f]">
+                    <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-sm font-medium text-foreground mb-2 block">
-                          Start Date & Time <span className="text-error">*</span>
+                        <label className="text-sm font-medium text-[#1e3a5f] mb-2 block">
+                          Start Date & Time <span className="text-red-600">*</span>
                         </label>
                         <Input
                           type="datetime-local"
@@ -217,13 +219,13 @@ export function DailyChecklist() {
                               [check.id]: e.target.value,
                             }))
                           }
-                          className="bg-background border-border text-foreground text-sm"
+                          className="bg-white border-[#1e3a5f]/30 text-[#1e3a5f]"
                           required
                         />
                       </div>
                       <div>
-                        <label className="text-sm font-medium text-foreground mb-2 block">
-                          End Date & Time <span className="text-error">*</span>
+                        <label className="text-sm font-medium text-[#1e3a5f] mb-2 block">
+                          End Date & Time <span className="text-red-600">*</span>
                         </label>
                         <Input
                           type="datetime-local"
@@ -234,15 +236,15 @@ export function DailyChecklist() {
                               [check.id]: e.target.value,
                             }))
                           }
-                          className="bg-background border-border text-foreground text-sm"
+                          className="bg-white border-[#1e3a5f]/30 text-[#1e3a5f]"
                           required
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-sm font-medium text-foreground mb-2 block">
-                        Observation <span className="text-error">*</span>
+                      <label className="text-sm font-medium text-[#1e3a5f] mb-2 block">
+                        Observation <span className="text-red-600">*</span>
                       </label>
                       <Textarea
                         placeholder="Enter detailed observations about this check item..."
@@ -253,14 +255,14 @@ export function DailyChecklist() {
                             [check.id]: e.target.value,
                           }))
                         }
-                        className="bg-background border-border text-foreground placeholder:text-muted-foreground text-sm"
+                        className="bg-white border-[#1e3a5f]/30 text-[#1e3a5f] placeholder:text-gray-400 text-sm"
                         rows={2}
                         required
                       />
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-foreground mb-2 block">
-                        Action Taken <span className="text-error">*</span>
+                      <label className="text-sm font-medium text-[#1e3a5f] mb-2 block">
+                        Action Taken <span className="text-red-600">*</span>
                       </label>
                       <Textarea
                         placeholder="Describe the action taken or maintenance performed..."
@@ -271,57 +273,57 @@ export function DailyChecklist() {
                             [check.id]: e.target.value,
                           }))
                         }
-                        className="bg-background border-border text-foreground placeholder:text-muted-foreground text-sm"
+                        className="bg-white border-[#1e3a5f]/30 text-[#1e3a5f] placeholder:text-gray-400 text-sm"
                         rows={2}
                         required
                       />
                     </div>
 
-                    <div className="bg-background rounded-lg p-3 space-y-3">
-                      <label className="text-sm font-medium text-foreground block">Items Used</label>
+                    <div className="bg-white rounded-lg p-3 space-y-3 border border-[#1e3a5f]/20">
+                      <label className="text-sm font-medium text-[#1e3a5f] block">Items Used (Optional)</label>
 
                       {(itemsUsed[check.id] || []).map((item, index) => (
-                        <div key={item.id} className="space-y-2 bg-secondary/50 p-3 rounded border border-border">
+                        <div key={item.id} className="space-y-2 bg-[#1e3a5f]/5 p-3 rounded border border-[#1e3a5f]/20">
                           <div className="flex items-center justify-between">
-                            <span className="text-xs font-medium text-muted-foreground">Item {index + 1}</span>
+                            <span className="text-xs font-medium text-gray-500">Item {index + 1}</span>
                             <button
                               type="button"
                               onClick={() => removeItem(check.id, item.id)}
-                              className="text-error hover:text-error/80 transition-colors"
+                              className="text-red-600 hover:text-red-700 transition-colors"
                             >
                               <X size={16} />
                             </button>
                           </div>
 
-                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                          <div className="grid grid-cols-3 gap-2">
                             <div>
-                              <label className="text-xs font-medium text-foreground mb-1 block">Item Name</label>
+                              <label className="text-xs font-medium text-[#1e3a5f] mb-1 block">Item Name</label>
                               <Input
                                 type="text"
                                 placeholder="e.g., Oil, Filter, Bolt"
                                 value={item.name}
                                 onChange={(e) => updateItem(check.id, item.id, "name", e.target.value)}
-                                className="bg-background border-border text-foreground text-sm h-8"
+                                className="bg-white border-[#1e3a5f]/30 text-[#1e3a5f] text-sm h-8"
                               />
                             </div>
                             <div>
-                              <label className="text-xs font-medium text-foreground mb-1 block">Quantity</label>
+                              <label className="text-xs font-medium text-[#1e3a5f] mb-1 block">Quantity</label>
                               <Input
                                 type="text"
                                 placeholder="e.g., 2, 5L, 1kg"
                                 value={item.quantity}
                                 onChange={(e) => updateItem(check.id, item.id, "quantity", e.target.value)}
-                                className="bg-background border-border text-foreground text-sm h-8"
+                                className="bg-white border-[#1e3a5f]/30 text-[#1e3a5f] text-sm h-8"
                               />
                             </div>
                             <div>
-                              <label className="text-xs font-medium text-foreground mb-1 block">Life Period</label>
+                              <label className="text-xs font-medium text-[#1e3a5f] mb-1 block">Life Period</label>
                               <Input
                                 type="text"
                                 placeholder="e.g., 1 year, 6 months"
                                 value={item.lifePeriod}
                                 onChange={(e) => updateItem(check.id, item.id, "lifePeriod", e.target.value)}
-                                className="bg-background border-border text-foreground text-sm h-8"
+                                className="bg-white border-[#1e3a5f]/30 text-[#1e3a5f] text-sm h-8"
                               />
                             </div>
                           </div>
@@ -333,37 +335,37 @@ export function DailyChecklist() {
                         onClick={() => addItem(check.id)}
                         variant="outline"
                         size="sm"
-                        className="w-full border-dashed"
+                        className="w-full border-dashed border-[#1e3a5f]/30 text-[#1e3a5f] hover:bg-[#1e3a5f]/10"
                       >
                         + Add Item Used
                       </Button>
                     </div>
 
-                    <div className="bg-background rounded-lg p-3 space-y-3">
-                      <label className="text-sm font-medium text-foreground block">Photographs (Optional)</label>
+                    <div className="bg-white rounded-lg p-3 space-y-3 border border-[#1e3a5f]/20">
+                      <label className="text-sm font-medium text-[#1e3a5f] block">Photographs (Optional)</label>
 
                       {(photos[check.id] || []).length > 0 && (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                           {(photos[check.id] || []).map((photo, index) => (
                             <div key={index} className="relative group">
                               <img
                                 src={URL.createObjectURL(photo) || "/placeholder.svg"}
                                 alt={`Photo ${index + 1}`}
-                                className="w-full h-20 sm:h-24 object-cover rounded border border-border"
+                                className="w-full h-24 object-cover rounded border border-[#1e3a5f]/20"
                               />
                               <button
                                 type="button"
                                 onClick={() => removePhoto(check.id, index)}
-                                className="absolute top-1 right-1 bg-error text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
                               >
-                                <X size={12} />
+                                <X size={14} />
                               </button>
                             </div>
                           ))}
                         </div>
                       )}
 
-                      <div className="border-2 border-dashed border-border rounded-lg p-4 text-center hover:border-primary/50 transition-colors cursor-pointer">
+                      <div className="border-2 border-dashed border-[#1e3a5f]/30 rounded-lg p-4 text-center hover:border-[#1e3a5f]/50 transition-colors cursor-pointer">
                         <input
                           type="file"
                           multiple
@@ -376,9 +378,9 @@ export function DailyChecklist() {
                           htmlFor={`photo-upload-${check.id}`}
                           className="cursor-pointer flex flex-col items-center gap-2"
                         >
-                          <Upload size={20} className="text-primary" />
-                          <span className="text-sm font-medium text-foreground">Click to upload photos</span>
-                          <span className="text-xs text-muted-foreground">or drag and drop</span>
+                          <Upload size={20} className="text-[#1e3a5f]" />
+                          <span className="text-sm font-medium text-[#1e3a5f]">Click to upload photos</span>
+                          <span className="text-xs text-gray-400">or drag and drop</span>
                         </label>
                       </div>
                     </div>
@@ -388,14 +390,11 @@ export function DailyChecklist() {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Button
-              onClick={handleSave}
-              className="bg-success hover:bg-success/90 text-success-foreground flex-1 font-semibold"
-            >
+          <div className="flex gap-3">
+            <Button onClick={handleSave} className="bg-green-600 hover:bg-green-700 text-white flex-1 font-semibold">
               Save Check
             </Button>
-            <Button variant="outline" className="border-primary/30 bg-transparent text-primary hover:bg-primary/10 sm:w-auto">
+            <Button variant="outline" className="border-[#1e3a5f]/30 bg-white text-[#1e3a5f] hover:bg-[#1e3a5f]/10">
               Clear Form
             </Button>
           </div>

@@ -1,99 +1,137 @@
-# Crane Maintenance System
+# 🏗️ Crane Maintenance Manager
 
-A comprehensive digital scheduling and tracking system for factory overhead cranes, designed to streamline maintenance operations and ensure safety compliance.
+An enterprise-grade digital scheduling, tracking, diagnostic AI analytics, and safety compliance system for factory overhead cranes.
 
-## 🏗️ Main Components
+![Next.js](https://img.shields.io/badge/Next.js-16.0-black?style=for-the-badge&logo=next.js)
+![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript)
+![AI Powered](https://img.shields.io/badge/AI-Diagnostic_Engine-emerald?style=for-the-badge)
 
-### 📊 [Main Dashboard](./components/main-dashboard.tsx)
-Central hub with tabbed interface providing:
-- Overview of all crane operations
-- Quick access to all maintenance modules
-- Real-time status monitoring
-- Progress tracking across all systems
+---
 
-### 🏗️ [Crane List](./components/crane-list.tsx)
-Complete crane inventory management:
-- 6 crane units with detailed specifications
-- Real-time health status monitoring
-- Capacity and location tracking
-- Maintenance scheduling overview
-- Quick stats dashboard
+## 📌 Overview
 
-### ✅ [Daily Checklist](./components/daily-checklist.tsx)
-Comprehensive maintenance checklist system:
-- **Daily Checks**: Wire rope, hook latch, brake response, oil leakage
-- **Weekly Checks**: Brake wear, rope strands, sheaves, control panels
-- **Monthly Checks**: Gearbox oil analysis, load testing, IR testing
-- Photo documentation support
-- Items used tracking with lifecycle management
-- Time-based activity logging
+The **Crane Maintenance Manager** is built for industrial plant managers, maintenance engineers, and safety inspectors to streamline the maintenance lifecycle of factory overhead cranes. It provides end-to-end operational visibility—from daily inspection logs and spare parts inventory to AI-generated diagnostic consultant reports complying with **ASME B30.2** and **OSHA 1910.179** standards.
 
-### 📦 [Inventory Manager](./components/inventory-manager.tsx)
-Smart spare parts and tools management:
-- Real-time stock level monitoring
-- Low stock alerts and reorder notifications
-- Supplier information and cost tracking
-- Critical parts identification
-- Inventory value calculations
+---
 
-### 📋 [Maintenance History](./components/maintenance-history.tsx)
-Historical maintenance data tracking and analysis
+## ✨ Key Features
 
-### 📖 [Procedures](./components/procedures.tsx)
-Standard operating procedures and maintenance guidelines
+### 1. 🏗️ Fleet Crane Overview
+- Monitor factory overhead cranes across halls (e.g. `CRANE-001` to `CRANE-006`, 10T–25T lifting capacity).
+- Real-time status indicators (Operational, Maintenance Required, Critical Alert).
 
-### 💰 [Cost Planning](./components/cost-planning.tsx)
-Budget planning and cost analysis for maintenance operations
+### 2. 📋 Daily Inspection Checklist
+- Interactive digital checklists for daily, weekly, and monthly maintenance checks.
+- Parameter checks for wire ropes, brake response times, hoist limit switches, motors, and electrical lines.
 
-## 🚀 Features
+### 3. 📜 Maintenance History & Diagnostic Logs
+- Comprehensive audit trails of pass/fail inspections.
+- Detailed issue records with severity classifications (High, Medium, Low).
 
-- **Real-time Monitoring**: Live status updates for all crane units
-- **Compliance Tracking**: Ensures adherence to IS standards and safety protocols
-- **Digital Documentation**: Photo uploads and detailed observation logging
-- **Smart Inventory**: Automated low-stock alerts and reorder management
-- **Progress Tracking**: Visual progress indicators for maintenance tasks
-- **Multi-level Checks**: Daily, weekly, and monthly maintenance schedules
+### 4. 🛠️ Standard Operating Procedures (SOPs)
+- Step-by-step guidelines for wire rope replacement, limit switch calibration, and brake pad servicing.
+
+### 5. 📦 Spare Parts & Inventory Manager
+- Track spare parts stock levels (wire ropes, brake linings, contactors, oil seals).
+- Low-stock warnings and component re-ordering notifications.
+
+### 6. 💰 Cost Planning & Budgeting
+- Maintenance expenditure tracking, cost projections, and preventive budgeting tools.
+
+### 7. 🤖 Executive AI Consultant & Diagnostic Report
+- **Fleet Health Index & Analytics**: Evaluates overall fleet health score (%) and pinpoints components needing urgent attention.
+- **Priority Action Roadmap**: Highlights critical safety tasks (e.g. Wire Rope replacement on `CRANE-003`, Limit Switch calibration on `CRANE-006`).
+- **Safety & Compliance Verification**: Flags violations against **ASME B30.2** and **OSHA 1910.179** standards.
+- **Dual View Modes**:
+  - **Executive Dashboard**: Interactive visual cards with health meters, status chips, and priority tags.
+  - **Full Consultant Report**: Formatted markdown text view for complete engineering review.
+- **Crane Filter & Export Capabilities**:
+  - Filter diagnostics by Crane ID (`ALL`, `CRANE-001`, `CRANE-003`, `CRANE-006`).
+  - **Print / Save as PDF** (`window.print()`).
+  - **Copy to Clipboard** with visual toast notification.
+  - **Export TXT / MD** file download.
+
+---
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: Next.js 14 with TypeScript
-- **UI Components**: Shadcn/ui with Tailwind CSS
+- **Framework**: Next.js 16 (App Router & Turbopack)
+- **UI & Styling**: React 19, Tailwind CSS v4, Radix UI Primitives, Shadcn UI
 - **Icons**: Lucide React
-- **Charts**: Recharts for data visualization
-- **Styling**: Modern dark/light theme support
+- **AI Gateway Integration**: Vercel AI SDK / OpenAI GPT Models
+- **Language**: TypeScript
 
-## 📱 User Interface
+---
 
-- Responsive design for desktop and mobile devices
-- Intuitive tabbed navigation
-- Real-time status indicators
-- Progress tracking with visual feedback
-- Modern card-based layout
+## 🚀 Getting Started
 
-## 🔧 Installation
+### Prerequisites
 
-```bash
-# Clone the repository
-git clone <repository-url>
+- Node.js (v18.0.0 or higher)
+- pnpm / npm / yarn package manager
 
-# Install dependencies
-npm install
+### Installation
 
-# Run development server
-npm run dev
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/SundramPandey/Crane-Maintenance-Systems.git
+   cd Crane-Maintenance-Systems
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   pnpm install
+   ```
+
+3. **Environment Setup**
+   Create a `.env.local` file in the root directory and add your AI Gateway credentials:
+   ```env
+   AI_GATEWAY_API_KEY=your_api_key_here
+   ```
+
+4. **Run the Development Server**
+   ```bash
+   pnpm dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+5. **Build for Production**
+   ```bash
+   pnpm build
+   pnpm start
+   ```
+
+---
+
+## 📁 Directory Structure
+
+```text
+├── app/
+│   ├── api/
+│   │   └── generate-report/    # AI Report Generation API route
+│   ├── globals.css             # Tailwind & Theme design tokens
+│   ├── layout.tsx              # Root Layout
+│   └── page.tsx                # Main App Entry
+├── components/
+│   ├── ui/                     # Shadcn & Radix UI primitives
+│   ├── ai-report.tsx           # AI Diagnostic Executive Dashboard
+│   ├── main-dashboard.tsx      # Header, Tabs & Main Layout
+│   ├── crane-list.tsx          # Crane Fleet Overview
+│   ├── daily-checklist.tsx     # Inspection Checklists
+│   ├── maintenance-history.tsx # History Audit Logs
+│   ├── inventory-manager.tsx   # Spare Parts Inventory
+│   ├── cost-planning.tsx       # Cost Budgeting
+│   ├── procedures.tsx          # SOP Manuals
+│   └── footer.tsx              # Footer Component
+├── public/                     # Static Assets & Icons
+├── README.md
+└── package.json
 ```
 
-## 📈 System Capacity
-
-- Supports 3-10 crane units
-- Scalable architecture for larger operations
-- Configurable maintenance schedules
-- Flexible inventory management
+---
 
 ## 🏢 Developed By
 
 **Sundram Pandey - Uttam Innovative Solution Pvt. Ltd.**
-
----
-
-*Digital transformation for industrial maintenance operations*
